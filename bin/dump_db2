@@ -1,0 +1,14 @@
+#!/usr/local/bin/perl -w 
+
+use BerkeleyDB;
+use Data::Dumper;
+use strict;
+
+my $file = shift;
+die("Couldn't find '$file'!\n") unless (-e $file);
+
+
+my %h;
+tie %h, 'BerkeleyDB::Hash', -Filename => $file;
+print Dumper( \%h );
+

@@ -1,0 +1,96 @@
+## General PATH
+#[ -n "$PATH" ] && export PATH=""
+prepend_path PATH $HOME/bin
+append_path PATH /usr/local/bin
+append_path PATH /usr/bin
+append_path PATH /bin
+append_path PATH /usr/X11R6/bin
+append_path PATH /usr/ccs/bin
+append_path PATH /usr/games
+append_path PATH /usr/lang
+append_path PATH /usr/local/jdk/bin
+append_path PATH /usr/local/mysql/bin
+append_path PATH /usr/sbin
+append_path PATH /usr/ucb
+append_path PATH /sbin
+append_path PATH .
+
+## General MANPATH
+#[ -n "$MANPATH" ] && export MANPATH=""
+append_path MANPATH /usr/man
+append_path MANPATH /usr/local/man
+append_path MANPATH /usr/local/X11R6/man
+append_path MANPATH /usr/local/X/man
+append_path MANPATH /usr/local/gnu/man
+append_path MANPATH /usr/local/lang/man
+append_path MANPATH /usr/lang/man
+append_path MANPATH /usr/share/man
+append_path MANPATH /usr/open/win/share/man
+append_path MANPATH /usr/dt/man
+append_path MANPATH /usr/share/man
+append_path MANPATH $HOME/man
+
+
+## By default, let others read our files but nothing more
+umask 022
+
+## CVS settings
+export CVS_RSH=ssh
+export CVSEDITOR="emacs"
+
+## Check window size & reset LINES & COLUMNS if need be, automatically
+shopt -s checkwinsize
+shopt -s histreedit
+
+## Paging & Editing
+export PAGER="less"
+export EDITOR="emacs"
+export VISUAL="emacs"
+
+## Autologout is a PITA, esp. since I have X set to lock automatically
+export AUTOLOGOUT=99999
+
+## ooohhhh... Pretty Pretty Colors
+if [ -f /etc/profile.d/color_ls.sh ]; then
+    . /etc/profile.d/color_ls.sh 
+fi
+[ -n $DISPLAY ] && {
+	[ -f /etc/profile.d/color_ls.sh ] && source /etc/profile.d/color_ls.sh
+	 export XAUTHORITY=$HOME/.Xauthority
+}
+
+## Tell us when stuff is done
+set -b 
+set -o notify
+set -o ignoreeof
+
+## Don't check for mail, it's annoying
+unset MAILCHECK
+
+## Let me put things in my home directory for LD
+export LD_LIBRARY_PATH=$HOME/lib
+
+## The prompt
+PS1="\[\033]0;\u@\h [$YROOT_NAME] \w\007\]\[\033[7m\][\t] \h:\W \!%\[\033[0m\] "
+
+## History
+export HISTIGNORE="&:bg:fg"
+export HISTIGNORE="&:bg:fg"
+
+## History
+export HISTSIZE="1000"
+export HISTFILE="$/.bash_history"
+export HISTFILESIZE="5000"
+#export HISTCONTROL="igoredups"
+export HISTCONTROL=
+shopt -s histappend
+
+## Core files can be useful when coding
+ulimit -c unlimited
+
+## Allow aliases in non-interactive shells
+shopt -s expand_aliases
+
+## Keyboard mappings used by Readline
+[ -z $INPUTRC ] && export INPUTRC=/etc/inputrc
+

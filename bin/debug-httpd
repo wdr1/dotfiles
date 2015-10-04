@@ -1,0 +1,40 @@
+#!/usr/local/bin/perl -w
+
+use strict;
+use HTTP::Daemon;
+use Getopt::Long;
+
+
+my $log;
+GetOptions('log:s' => \$log);
+open(LOG, ">$log") || die("Could open log file '$log': $!");
+if ($log) {
+    print "Logging to '$log'...\n";
+    select (LOG);
+    $|++;
+    select (STDOUT);
+}
+print LOG "Log started at ", scalar localtime, "\n";
+
+my $server = HTTP::Daemon->new(Timeout => 60, LocalPort => 1109);
+print "Please contact me at: <URL:", $server->url, ">\n";
+
+while (my $client = $server->accept) {
+  CONNECTION:
+    while (my $answer = $client->get_request) {
+        print $answer->as_string;
+        print LOG $answer->as_string if ($log);
+        $client->autoflush;
+      RESPONSE:
+        while (<STDIN>) {
+            last RESPONSE   if $_ eq ".\n";
+            last CONNECTION if $_ eq "..\n";
+            print $client $_;
+        }
+        print "\nEOF\n";
+    }
+    print "CLOSE: ", $client->reason, "\n";
+    $client->close;
+    undef $client;
+}
+

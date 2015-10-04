@@ -1,0 +1,13 @@
+#!/usr/local/bin/perl -w
+# -*-cperl-*-
+
+use strict;
+
+my $term_count = shift || 1;
+
+my $file = '/home/wdr1/bin/terms.txt';
+open(F, $file) || die("Couldn't open '$file': $!");
+my @terms = <F>;
+while ($term_count-- > 0) {
+  print $terms[ int(rand( scalar @terms )) ];
+}

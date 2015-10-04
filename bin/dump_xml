@@ -1,0 +1,16 @@
+#!/usr/local/bin/perl -w
+
+use strict;
+use XML::Simple;
+use Data::Dumper;
+use Cwd;
+
+#my $file = cwd . '/' . shift;
+my $file = shift;
+open(F, $file) || die("$file: $!");
+$/ = undef;
+my $data = <F>;
+while ($data =~ s/\&([^\;]{7}|[^\;]*$)/\&amp;$1/g) {};
+my $xml = XMLin($data,
+               );
+print Dumper( $xml );

@@ -1,0 +1,23 @@
+#! /usr/local/bin/perl
+
+while (<STDIN>)
+{
+  $len = length($_);
+  for ($i = 0; $i < $len; $i++)
+  {
+    $char = substr($_, $i, 1);
+    $ascii = ord($char);
+
+    if ($ascii < 9) {
+      print "\033[01;33m\\" . sprintf("%03d", $ascii) . "\033[0m";
+    } elsif ($ascii > 13 && $ascii < 32) {
+      print "\033[01;32m\\" . sprintf("%03d", $ascii) . "\033[0m";
+    } elsif ($ascii > 127) {
+      print "\033[01;37m\\" . sprintf("%03d", $ascii) . "\033[0m";
+    } else {
+      print $char;
+    }
+  }
+  print "\033[0m";
+}
+print "\033[0m";

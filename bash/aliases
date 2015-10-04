@@ -1,0 +1,99 @@
+## $Id: aliases,v 1.1.1.1 2010/08/14 04:57:50 wdr1 Exp $
+
+## Useful commands
+alias space="du -a ${HOME} | sort -nr |more"
+alias when="date '+Date: %a %d %h 19%y%nTime: %T'"
+alias	v="vgrind -t"
+alias se=setup_env_and_leave 
+
+function f () { finger -l ${1} | less -E; }
+function watch () { tail -f $@ | filt; }
+
+## Gzip things
+function gmore () { gzip -dc $@ | less -E; }
+function gless () { gzip -dc $@ | less -E; }
+function gcat ()  { gzip -dc $1; }
+function bak () { cp ${1} ${1}.bak; }
+
+## Grepping & paging
+function spl () { grep $1 /usr/share/dict/words; }
+function psg () { ps -auxww | egrep $1; }
+function hsg () { history | egrep $1; }
+function psjg () { ps -jauxww | egrep $1; }
+function cvslog () { cvs log ${1} | less; }
+
+## Overloads & shortcuts
+alias pd="/usr/local/bin/perl -de 1"
+alias	la="ls -a"
+alias ls="ls -F"
+alias	ll="ls -l"
+alias lla="ls -la"
+alias start_xearth="/usr/X11R6/bin/xearth -pos 'fixed 42.33 -71.08' -rot -10  -nomarkers -nostar"
+alias startx="ssh-agent startx"
+alias	h="history"
+alias	more="less -E"
+alias	g="gzip"
+alias	gd="gzip -d"
+alias	g="egrep"
+alias	[]="exit"
+alias	][="exit"
+alias ss="sudo /usr/local/bin/soundon"
+alias cd="cd -P"
+alias v="vim"
+alias changed="cvs -n update"
+alias sab="ssh-agent bash"
+alias sad="ssh-add"
+alias scp="scp -p"
+alias kaf="killall -f" 
+alias kaf9="killall -f -9" 
+alias print_pods="find . -name "*.pm"  | perl -p -e 's|^\./||'  | perl -p -e 's|/|::|g' | perl -p -e 's|\.pm$||' |perl -p -e 's|\n$| |' | xargs -t -n 1 print_pod'"
+alias fixssh='source $HOME/.ssh/screen_agent'
+alias sx="screen -x"
+alias j='jump'
+
+## Printing
+alias	es="enscript -2r --margins=::50:50 -G"
+alias	esp="enscript -2r --margins=::50:50 --pretty-print=perl -G"
+alias	esp="enscript -2r --margins=::50:50 --pretty-print=java -G"
+alias	ess="enscript -2r --margins=::50:50 --pretty-print=sql -G"
+alias	esh="enscript -2r --margins=::50:50 --pretty-print=html -G"
+
+alias	sc=". $HOME/.bash_profile"
+alias	k9="kill -9"
+alias chp="chmod a+x *.pl"
+alias xmlpretty="xmlpretty --PrettyWhiteNewline --PrettyWhiteIndent --CatchEmptyElement"
+alias sub="grep '^sub'" 
+
+## CVS functions
+alias 'cvc'='cvs checkout' 
+alias 'cvd'='cvs diff'
+alias 'cvu'='cvs update'
+
+## Emacs quickies
+alias	e="emacs"
+alias	en="emacs -nw"
+alias sen="sudo emacs -nw"
+
+# Notes
+alias qn='cat - >> ~/notes/qn.`date +%y%m%d`'
+alias qnl='cat ~/notes/qn.`date +%y%m%d`'
+
+## xmms aliases
+alias xn="xmms --fwd"
+alias xp="xmms --rew"
+
+## Change around cvs settings
+alias amusivecvs="export CVS_RSH='ssh'; export CVSROOT=':ext:wdr1@amusive.com:/home/cvs'"
+alias mgrepcvs="export CVS_RSH='ssh'; export CVSROOT=':ext:wdr1@cvs.mgrep.sourceforge.net:/cvsroot/mgrep'"
+
+## Unalias things
+tmp=`alias -p | grep "^alias rm="`
+if [ -n "$tmp" ]; then
+    unalias rm;
+fi
+
+tmp=`alias -p | grep "^alias mv="`
+if [ -n "$tmp" ]; then
+    unalias mv
+fi
+

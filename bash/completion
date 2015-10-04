@@ -1,0 +1,15 @@
+complete -A command nohup exec eval trace gdb
+complete -A command command type which 
+complete -u finger su usermod userdel passwd
+complete -f -X '!*.ps'  gs ghostview gv
+complete -f -X '!*.pdf' acroread
+complete -d cd
+complete -c which
+complete -f more less 
+complete -F foob clock
+COMPGEN_SSH_USERS=(breardon wdr1 devtemp jobu)
+COMPGEN_SSH_HOSTS=(amusive.com barney.petsmart.com petsun.pasa.petsmart.com spot.pasa.petsmart.com jolly.pasa.petsmart.com gargoyle.cs.uchicago.edu localhost fermi.pasa.petsmart.com pandora.pasa.petsmart.com)
+#complete -F compgen_ssh ssh
+complete -F compgen_ssh ssh
+complete -F _jump jump
+complete -F _jump j

@@ -14,6 +14,7 @@
 
 ;; And let's have it on while loading ~/.emacs
 (dbon)
+
 (setq meta-flag t)
 (setq backup-by-copying              t)  ; To preserve ACLs, date/times, etc.
 (setq backup-by-copying-when-linked  t)
@@ -499,9 +500,6 @@ If omitted, NONMARKING defaults to nil and FILE defaults to diary-file."
 (defun my-emacs-21-settings () (interactive) 
     (global-font-lock-mode t)
     (setq font-lock-maximum-decoration t)
-    (add-hook 'font-lock-mode-hook 'turn-on-fast-lock)
-    ;; that toolbar is awful.  turn it off!
-    (tool-bar-mode -1)
     )
 
 (if (>= emacs-major-version 21)
@@ -511,7 +509,6 @@ If omitted, NONMARKING defaults to nil and FILE defaults to diary-file."
 (defun setup-hilit () (interactive)
   (global-font-lock-mode t)
   (setq font-lock-maximum-decoration t)
-  (add-hook 'font-lock-mode-hook 'turn-on-fast-lock)
   )
 
 ;; do it.

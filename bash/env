@@ -79,7 +79,7 @@ export HISTIGNORE="&:bg:fg"
 
 ## History
 export HISTSIZE="1000"
-export HISTFILE="$/.bash_history"
+export HISTFILE="$HOME/.bash_history"
 export HISTFILESIZE="5000"
 #export HISTCONTROL="igoredups"
 export HISTCONTROL=

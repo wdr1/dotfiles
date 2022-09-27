@@ -2,7 +2,7 @@
 
 ##############################################################################
 ## Stolen from fink.  Use these to set/tweak/paths.  They need to be
-## defined before other user functions, for reasons that shoul be obvious.
+## defined before other user functions, for reasons that should be obvious.
 append_path() {
     if ! eval test -z "\"\${$1##*:$2:*}\"" -o -z "\"\${$1%%*:$2}\"" -o -z "\"\${$1##$2:*}\"" -o -z "\"\${$1##$2}\"" ; then
         eval "$1=\$$1:$2"
